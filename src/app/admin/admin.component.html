@@ -1,0 +1,52 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button (click)="foldUnfold.toggle()">
+        <mat-icon>menu</mat-icon>
+    </button>
+    <span style="flex: auto;"></span>
+    <mat-icon>home</mat-icon>
+    <button mat-button routerLink="/admin/home">Home</button>
+
+    <button mat-button *ngIf="authService.isAuthenticated">
+        <mat-icon>account_circle</mat-icon> {{authService.username}}
+    </button>
+    <button (click)="logout()" mat-raised-button routerLink="/login" color="accent">
+        Logout
+    </button>
+</mat-toolbar>
+<mat-drawer-container>
+    <mat-drawer #foldUnfold opened="true" mode="side" position="start">
+        <mat-list>
+            <mat-list-item>
+                <button mat-button routerLink="/admin/dashboard">
+                    <mat-icon>dashboard</mat-icon>
+                    Dashboard
+                </button>
+            </mat-list-item>
+            <mat-list-item>
+                <button mat-button routerLink="/admin/orders">
+                    <mat-icon>forward</mat-icon>
+                    Orders
+                </button>
+            </mat-list-item>
+            <mat-list-item>
+                <button mat-button routerLink="/admin/sales">
+                    <mat-icon>forward</mat-icon>
+                    Sales
+                </button>
+            </mat-list-item>
+            <mat-list-item>
+                <button *ngIf="authService.roles.includes('ADMIN')" mat-button [matMenuTriggerFor]="listMenu">
+                    <mat-icon>forward</mat-icon>Repo</button>
+                <mat-menu #listMenu>
+                    <button mat-button routerLink="/admin/sellers">List of sallers</button>
+                    <button mat-button routerLink="/admin/customers">List of customers</button>
+                </mat-menu>
+            </mat-list-item>
+        </mat-list>
+    </mat-drawer>
+    <mat-drawer-container>
+        <div style="min-height: 600px;">
+            <router-outlet></router-outlet>
+        </div>
+    </mat-drawer-container>
+</mat-drawer-container>

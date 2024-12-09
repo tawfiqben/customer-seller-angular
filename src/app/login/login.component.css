@@ -1,0 +1,19 @@
+mat-form-field{
+    display: block;
+}
+
+.login-form {
+    width: 300px;
+    flex: auto;
+    margin: auto;
+}
+
+:host {
+    height: 107vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #b4c72e;
+}
+
